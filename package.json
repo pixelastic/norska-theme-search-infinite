@@ -3,9 +3,11 @@
     "aberlaas": "1.13.3",
     "norska": "1.4.0"
   },
+  "peerDependencies": {
+    "norska": "1.4.0"
+  },
   "files": [
     "main.js",
-    "lib/*.js",
     "src/"
   ],
   "license": "MIT",
