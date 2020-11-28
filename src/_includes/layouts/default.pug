@@ -1,0 +1,16 @@
+doctype html
+html(lang='en')
+  +norska_head
+  body.bg-indigo-8
+    include ../theme/header.pug
+    .mt-9.p-2
+      #hits.js-masonryWall.min-h-100vh
+    block content
+
+    //- textarea#hitTemplate(hidden)
+    //-   include _includes/templates/hit
+    //- textarea#emptyTemplate(hidden)
+    //-   include _includes/templates/empty
+
+  script!=`window.CONFIG = ${JSON.stringify(data.config)}`
+  +norska_scripts

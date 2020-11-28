@@ -2,10 +2,16 @@
   "devDependencies": {
     "aberlaas": "1.13.3"
   },
-  "files": ["lib/*.js"],
+  "files": [
+    "main.js",
+    "lib/*.js",
+    "src/"
+  ],
   "license": "MIT",
-  "main": "lib/main.js",
+  "main": "./main.js",
+  "homepage": "https://projects.pixelastic.com/norska/",
   "name": "norska-theme-search-infinite",
+  "description": "Norska theme for search with infinite scroll",
   "scripts": {
     "ci": "./scripts/ci",
     "husky:precommit": "./scripts/husky-precommit",
