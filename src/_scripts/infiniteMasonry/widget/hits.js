@@ -1,8 +1,8 @@
 const config = require('./config.js');
 const resize = require('./resize.js');
 const events = require('./events.js');
-// const transformHits = require('norska/frontend/algolia/transformHits');
-// const transforms = require('../transforms.js');
+const transformHits = require('norska/frontend/algolia/transformHits');
+const themeConfig = require('../../../themeConfig.js');
 module.exports = {
   /**
    * Appends new hits to the existing list
@@ -24,12 +24,15 @@ module.exports = {
     const hitCount = config.get('hitCount');
     const newHits = hits.slice(hitCount, hits.length);
     const render = config.get('render');
-    const transformedHits = newHits;
-    // const transformedHits = transformHits(newHits, transforms);
+
+    // Transform hits based on the transform key passed to theme.init()
+    const { transforms } = themeConfig.options;
+    const transformedHits = transformHits(newHits, transforms);
+
     const ids = [];
     const html = transformedHits
       .map((hit) => {
-        ids.push(hit.id);
+        ids.push(hit.objectID);
         return render(hit);
       })
       .join('\n');

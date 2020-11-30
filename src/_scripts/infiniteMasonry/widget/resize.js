@@ -26,7 +26,7 @@ const resize = (idOrIds, userOptions = {}) => {
   const id = idOrIds;
 
   const node = document.getElementById(id);
-  const image = node.querySelector('.js-masonryImage');
+  const image = node && node.querySelector('img');
   const options = {
     waitForImage: true,
     saveHeight: false,
