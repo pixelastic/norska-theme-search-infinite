@@ -1,6 +1,6 @@
 module.exports = {
-  hitTemplate({ include }) {
-    const templatePath = '_includes/templates/hit.pug';
+  template(templateName, { include }) {
+    const templatePath = `_includes/templates/${templateName}.pug`;
     try {
       return include(templatePath);
     } catch (_err) {

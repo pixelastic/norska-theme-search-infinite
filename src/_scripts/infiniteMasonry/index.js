@@ -49,10 +49,11 @@ module.exports = {
                 'https://www.algolia.com/?utm_source=instantsearch.js&utm_medium=website&utm_content=gamemaster.pixelastic.com/maps&utm_campaign=poweredby';
               const suffix = `thanks to <a class="ais-Stats-link" href="${poweredByUrl}" target="_blank">Algolia</a>`;
               const { query, nbHits } = options;
+              const pluralizedHitName = nbHits === 1 ? hitName : `${hitName}s`;
               if (!query) {
-                return `${nbHits} ${hitName}s indexed, ${suffix}`;
+                return `${nbHits} ${pluralizedHitName} indexed, ${suffix}`;
               }
-              return `${nbHits} ${hitName}s found, ${suffix}`;
+              return `${nbHits} ${pluralizedHitName} found, ${suffix}`;
             },
           },
         },
