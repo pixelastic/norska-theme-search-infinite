@@ -4,8 +4,8 @@ html(lang='en')
   body.bg-theme
     include ../header.pug
     .mt-9.p-2
+      block content
       #hits.js-masonryWall.min-h-100vh
-    block content
 
     textarea#hitTemplate(hidden)
       include ../templates/hit

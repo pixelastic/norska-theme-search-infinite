@@ -2,11 +2,8 @@ const lazyload = require('norska/frontend/lazyload');
 const algolia = require('norska/frontend/algolia');
 const {
   configure,
-  refinementList,
   searchBox,
-  sortBy,
   stats,
-  toggleRefinement,
 } = require('norska/frontend/algolia/widgets');
 const credentials = window.CONFIG.algolia;
 const widget = require('./widget');
@@ -14,8 +11,8 @@ const themeConfig = require('../../themeConfig.js');
 
 module.exports = {
   initSearch() {
-    const { placeholder, hitName } = themeConfig.options;
-    const widgets = [
+    const { placeholder, hitName, widgets } = themeConfig.options;
+    const defaultWidgets = [
       /**
        * Main configuration
        **/
@@ -58,24 +55,6 @@ module.exports = {
           },
         },
       },
-      {
-        type: toggleRefinement,
-        options: {
-          container: '#curated',
-          attribute: 'score.isCurated',
-          templates: {
-            labelText: 'Only curated authors:',
-          },
-        },
-      },
-      {
-        type: refinementList,
-        options: {
-          container: '#tags',
-          attribute: 'tags',
-          sortBy: ['count:desc', 'name:asc'],
-        },
-      },
       /**
        * Hits
        **/
@@ -89,27 +68,11 @@ module.exports = {
           },
         },
       },
-      /**
-       * Sorting
-       **/
-      {
-        type: sortBy,
-        options: {
-          container: '#sortBy',
-          items: [
-            { label: 'most recent', value: credentials.indexName },
-            {
-              label: 'most popular',
-              value: `${credentials.indexName}_popularity`,
-            },
-          ],
-        },
-      },
     ];
 
     algolia
       .init(credentials, { routerIgnore: ['page'] })
-      .setWidgets(widgets)
+      .setWidgets([...defaultWidgets, ...widgets])
       .start();
   },
   initLazyload() {
