@@ -1,15 +1,9 @@
-/* purgecss start ignore */
 /**
  * Hits
  **/
 .js-masonryWall {
-  @apply grid gap-x-1 gap-y-1 grid-cols-w-10 pr-1;
+  @apply grid gap-x-1 gap-y-1 grid-cols-w-20 pr-1;
   grid-auto-rows: 10px; /* Implicit height of newly created rows */
-}
-@screen md {
-  .js-masonryWall {
-    @apply grid-cols-w-14;
-  }
 }
 .js-masonryBackToTop {
   @apply row-span-5 flrnw flc white text-4 pointer;
@@ -31,4 +25,3 @@
 .ais-highlight {
   @apply px-001 bold underline bg-transparent blue;
 }
-/* purgecss end ignore */
