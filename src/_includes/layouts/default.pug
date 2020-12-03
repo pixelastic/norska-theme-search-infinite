@@ -6,6 +6,7 @@ html(lang='en')
     .mt-9.p-2
       block content
       #hits.js-masonryWall.min-h-100vh
+      !=data.themeMethods.template('footer', { include })
 
     textarea#hitTemplate(hidden)
       include ../templates/hit
