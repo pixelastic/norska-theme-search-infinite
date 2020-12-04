@@ -42,8 +42,9 @@ module.exports = {
           container: '#stats',
           templates: {
             text(options) {
-              const poweredByUrl =
-                'https://www.algolia.com/?utm_source=instantsearch.js&utm_medium=website&utm_content=gamemaster.pixelastic.com/maps&utm_campaign=poweredby';
+              const { hostname, pathname } = window.location;
+              const utmContent = `${hostname}${pathname}`;
+              const poweredByUrl = `https://www.algolia.com/?utm_source=instantsearch.js&utm_medium=website&utm_content=${utmContent}&utm_campaign=poweredby`;
               const suffix = `thanks to <a class="ais-Stats-link" href="${poweredByUrl}" target="_blank">Algolia</a>`;
               const { query, nbHits } = options;
               const pluralizedHitName = nbHits === 1 ? hitName : `${hitName}s`;
