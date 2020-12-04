@@ -1,5 +1,6 @@
 input.hidden.if(type="checkbox" id="filters")
-.__header.fixed.top-0.left-0.right-0.z-7.h-9.px-1.white.bg-theme
+.__header.fixed.top-0.left-0.right-0.z-1.h-9.px-1.white.bg-theme
+  label(for="filters").absolute.z-1.inset-0.h-100vh.bg-black.bg-opacity-50p.pointer.hidden.then_block
   .absolute.left-0.right-0.-bottom-01.h-01.bg-gradient-y.bg-gradient-from-blue-7
   .container.mx-auto.h-100p
     .h-100p.pt-02.flex.flex-col
@@ -20,7 +21,7 @@ input.hidden.if(type="checkbox" id="filters")
           #stats
           #poweredBy
 
-        .absolute.right-0.top-0.hidden.then_block
+        .absolute.z-2.right-0.top-0.hidden.then_block
           .bg-gray-1.rounded.shadow-2.border-001.border-gray-4
             !=data.themeMethods.template('filters', { include })
 
