@@ -1,5 +1,5 @@
 const infiniteMasonry = require('./_scripts/infiniteMasonry');
-const themeConfig = require('./themeConfig.js');
+const themeConfig = require('./_scripts/themeConfig.js');
 
 module.exports = {
   /**

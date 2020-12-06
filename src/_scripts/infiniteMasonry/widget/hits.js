@@ -2,7 +2,7 @@ const config = require('./config.js');
 const resize = require('./resize.js');
 const events = require('./events.js');
 const transformHits = require('norska/frontend/algolia/transformHits');
-const themeConfig = require('../../../themeConfig.js');
+const themeConfig = require('../../themeConfig.js');
 module.exports = {
   /**
    * Appends new hits to the existing list

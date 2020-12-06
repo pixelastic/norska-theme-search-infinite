@@ -7,7 +7,7 @@ const {
 } = require('norska/frontend/algolia/widgets');
 const credentials = window.CONFIG.algolia;
 const widget = require('./widget');
-const themeConfig = require('../../themeConfig.js');
+const themeConfig = require('../themeConfig.js');
 
 module.exports = {
   initSearch() {
