@@ -5,6 +5,7 @@
   },
   "files": [
     "main.js",
+    "tailwind.config.js",
     "src/"
   ],
   "license": "MIT",
