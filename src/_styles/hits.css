@@ -6,7 +6,7 @@
   grid-auto-rows: 10px; /* Implicit height of newly created rows */
 }
 .js-masonryBackToTop {
-  @apply row-span-5 flrnw flc white text-4 pointer;
+  @apply row-span-5 flex flex-no-wrap flex-center white text-4 pointer;
   grid-column: 1 / -1; /* Take all width */
   &:hover {
     @apply underline;

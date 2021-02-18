@@ -2,7 +2,7 @@
  * Refinement Lists
  **/
 .ais-ToggleRefinement-labelText {
-  @apply flrnw flc py-001 pr-6 pointer relative;
+  @apply flex flex-no-wrap flex-center py-001 pr-6 pointer relative;
   &:before,
   &:after {
     content: '';

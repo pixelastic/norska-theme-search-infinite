@@ -4,7 +4,7 @@ input.hidden.if(type="checkbox" id="filters")
   .absolute.left-0.right-0.-bottom-01.h-01.bg-gradient-y.bg-gradient-from-blue-7
   .container.mx-auto.h-100p
     .h-100p.pt-02.flex.flex-col
-      .fla.rounded-4.bg-gray-2.bg-opacity-25p.flex.flex-rows.items-center.px-1.hover_bg-opacity-50p.focus-within_bg-opacity-75p.shadow-2
+      .flex-auto.rounded-4.bg-gray-2.bg-opacity-25p.flex.flex-rows.items-center.px-1.hover_bg-opacity-50p.focus-within_bg-opacity-75p.shadow-2
         //- Title
         a.hidden.md_block(href=url.pathToRoot)
           img.h-6.grayscale.hover_grayscale-0(src=`${url.pathToRoot}/assets/logo.png`)
@@ -17,7 +17,7 @@ input.hidden.if(type="checkbox" id="filters")
             include svg/sliders
 
       .relative.mx-2
-        .flex.flex-rows.justify-end.text-01.italic.pt-001.opacity-75p
+        .flex.flex-row.justify-end.text-01.italic.pt-001.opacity-75p
           #stats
           #poweredBy
 
