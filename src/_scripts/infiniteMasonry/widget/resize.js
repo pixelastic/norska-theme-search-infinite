@@ -26,7 +26,7 @@ const resize = (idOrIds, userOptions = {}) => {
   const id = idOrIds;
 
   const node = document.getElementById(id);
-  const image = node && node.querySelector('img');
+  const image = node && node.querySelector('img.js-masonryImage');
   const options = {
     waitForImage: true,
     saveHeight: false,
@@ -43,12 +43,14 @@ const resize = (idOrIds, userOptions = {}) => {
   if (!spanHeight) {
     spanHeight = resize.getSpanHeight(node);
   }
+  // If still unable to get the height, it means the node has been removed from
+  // the page, so we'll just stop the resizing
+  if (!spanHeight) {
+    return;
+  }
 
   // Resize the height to match the grid rows
   node.parentNode.style.gridRowEnd = `span ${spanHeight}`;
-  setTimeout(() => {
-    // node.style.height = '100%';
-  }, 100);
 
   // Save the height in cache so next calls are faster
   if (options.saveHeight) {
@@ -74,10 +76,15 @@ const resize = (idOrIds, userOptions = {}) => {
 
 /**
  * Returns the height of a brick in span units
- * @param {object} node Node to size
+ * @param {object|string} nodeOrId Node (or node id) to resize
  * @returns {number} Number of units it spans
- **/
-resize.getSpanHeight = (node) => {
+ */
+resize.getSpanHeight = (nodeOrId) => {
+  const isString = typeof nodeOrId === 'string';
+  const node = isString ? document.getElementByid(nodeOrId) : nodeOrId;
+  if (!node) {
+    return false;
+  }
   const gapHeight = config.get('gapHeight');
   const rowHeight = config.get('rowHeight');
   const innerHeight = node.getBoundingClientRect().height;
