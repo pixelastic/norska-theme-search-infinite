@@ -9,71 +9,81 @@ module.exports = {
    * @param {Array} hits List of hits
    **/
   append(hits) {
+    const container = config.get('container');
+    const isAppendMode = config.get('appendMode');
+
     // Hide/show the "Sorry, no result found"
     document.getElementById('empty').classList.toggle('hidden', hits.length);
 
-    const container = config.get('container');
-
     // Return early if no results
     if (!hits.length) {
-      container.innerHTML = ''
+      container.innerHTML = '';
       return;
     }
 
-    // Generating the new result
+    // Rendering the hits
+    const newHits = hits.slice(config.get('hitCount'), hits.length);
+    const newHitsHtml = this.getHitsHtml(newHits);
+    container.innerHTML = isAppendMode
+      ? `${container.innerHTML}${newHitsHtml}`
+      : newHitsHtml;
+    // Resizing them
+    const newHitsIds = newHits.map((hit) => {
+      return hit.objectID;
+    });
+    resize(newHitsIds);
 
-    // When reaching the bottom, 
+    // Keeping track of how many hits we have rendered so far
+    config.set('hitCount', hits.length);
 
-
-
-    const isAppendMode = config.get('appendMode');
-
-    const hitCount = config.get('hitCount');
-    const newHits = hits.slice(hitCount, hits.length);
-    const hasNewHits = newHits.length > 0;
-    const hasHits = hitCount > 0 || hasNewHits;
-
-
-    // Browsers have a limit to the number of rows. If we add more than this
-    // limit, items will stack on top of each other. Chrome has a limit to 1000,
-    // Firefox to 10.000. Just to be sure we'll stop adding items if we're
-    // nearing 800 rows.
-    const rowCount = resize.getSpanHeight(container);
-    const maxRowCount = 800;
-    const hasTooManyCssRows = rowCount >= maxRowCount;
-
-    if ((isAppendMode && hasTooManyCssRows) || !hasNewHits) {
+    // Stop the infinite scroll if we're at the bottom
+    if (this.hasReachedBottom(newHits)) {
       this.addBackToTopButton();
-      // Disable the infinite scroll until a new query is entered
       config.set('disableInfiniteScroll', true);
       return;
     }
 
+    // Add a sentinel at the bottom, to enable the infinite scroll
+    this.addSentinel();
+  },
+  /**
+   * Returns the HTML representation of the specified hits
+   * @param {Array} hits List of hits to render
+   * @returns {string} HTML string of the rendered hits
+   **/
+  getHitsHtml(hits) {
     const render = config.get('render');
-
-    // Transform hits based on the transform key passed to theme.init()
-    const { transforms } = themeConfig.options;
-    const transformedHits = transformHits(newHits, transforms);
-
-    const ids = [];
-    const html = transformedHits
+    const transformedHits = transformHits(hits, themeConfig.options.transforms);
+    return transformedHits
       .map((hit) => {
-        ids.push(hit.objectID);
         return render(hit);
       })
       .join('\n');
-
-    if (isAppendMode) {
-      container.innerHTML += html;
-    } else {
-      container.innerHTML = html;
+  },
+  /**
+   * Check if we have reached the bottom of the page
+   * @param {Array} newHits List of new hits to add to the page
+   * @returns {boolean} true if bottom is reached, false otherwise
+   **/
+  hasReachedBottom(newHits) {
+    // Bottom is reached when no more search results are available
+    if (!newHits.length) {
+      return true;
     }
 
-    // Add a sentinel at the bottom, to enable the infinite scroll
-    this.addSentinel();
+    // Bottom is never reached on first display
+    if (!config.get('appendMode')) {
+      return false;
+    }
 
-    config.set('hitCount', hitCount + newHits.length);
-    resize(ids);
+    // Browsers have a limit to the number of CSS grid rows. If we add more than
+    // this limit, items will stack on top of each other. Chrome has a limit to
+    // 1000, Firefox to 10.000. Just to be sure we'll consider having reached
+    // the bottom if we're nearing 800 rows
+    const container = config.get('container');
+    const rowCount = resize.getSpanHeight(container);
+    const maxRowCount = 800;
+    return rowCount > maxRowCount;
   },
   /**
    * Add a sentinel at the bottom of the list
