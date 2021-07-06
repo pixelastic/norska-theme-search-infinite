@@ -2,7 +2,11 @@ const { get, set } = require('lodash-es');
 const hogan = require('hogan.js');
 module.exports = {
   __stable: {},
-  __runtime: {},
+  __runtime: {
+    hitCount: 0, // Current number of hits displayed
+    appendMode: false, // If hits should be appended to the list or replace it
+    disableInfiniteScroll: false, // If the infinite scroll should be currently disabled or not
+  },
   /**
    * Returns a config value
    * @param {string} key Key to read
@@ -26,6 +30,7 @@ module.exports = {
     this.__runtime = {
       hitCount: 0,
       appendMode: false,
+      disableInfiniteScroll: false,
     };
   },
   /**

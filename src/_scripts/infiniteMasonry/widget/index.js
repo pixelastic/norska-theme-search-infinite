@@ -15,25 +15,20 @@ module.exports = {
       if (isFirstRender) {
         config.setStable(widgetParams);
         hits.onInfiniteScroll(() => {
-          this.setAppendMode(true);
+          config.set('appendMode', true);
           showMore();
         });
         return;
       }
 
-      // Clear all runtime config, unless we're triggering the infinite scroll
-      if (!this.isAppendMode()) {
+      // Start a new search
+      if (!config.get('appendMode')) {
         config.clear();
+        window.scrollTo(0, 0);
       }
 
       hits.append(hitList);
-      this.setAppendMode(false);
+      config.set('appendMode', false);
     });
-  },
-  setAppendMode(value) {
-    config.set('appendMode', value);
-  },
-  isAppendMode() {
-    return config.get('appendMode');
   },
 };

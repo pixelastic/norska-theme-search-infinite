@@ -65,7 +65,6 @@ module.exports = {
           container: '#hits',
           templates: {
             item: document.getElementById('hitTemplate').value,
-            empty: document.getElementById('emptyTemplate').value,
           },
         },
       },

@@ -9,20 +9,46 @@ module.exports = {
    * @param {Array} hits List of hits
    **/
   append(hits) {
+    // Hide/show the "Sorry, no result found"
+    document.getElementById('empty').classList.toggle('hidden', hits.length);
+
     const container = config.get('container');
+
+    // Return early if no results
+    if (!hits.length) {
+      container.innerHTML = ''
+      return;
+    }
+
+    // Generating the new result
+
+    // When reaching the bottom, 
+
+
+
+    const isAppendMode = config.get('appendMode');
+
+    const hitCount = config.get('hitCount');
+    const newHits = hits.slice(hitCount, hits.length);
+    const hasNewHits = newHits.length > 0;
+    const hasHits = hitCount > 0 || hasNewHits;
+
 
     // Browsers have a limit to the number of rows. If we add more than this
     // limit, items will stack on top of each other. Chrome has a limit to 1000,
     // Firefox to 10.000. Just to be sure we'll stop adding items if we're
     // nearing 800 rows.
     const rowCount = resize.getSpanHeight(container);
-    if (rowCount >= 800) {
+    const maxRowCount = 800;
+    const hasTooManyCssRows = rowCount >= maxRowCount;
+
+    if ((isAppendMode && hasTooManyCssRows) || !hasNewHits) {
       this.addBackToTopButton();
+      // Disable the infinite scroll until a new query is entered
+      config.set('disableInfiniteScroll', true);
       return;
     }
 
-    const hitCount = config.get('hitCount');
-    const newHits = hits.slice(hitCount, hits.length);
     const render = config.get('render');
 
     // Transform hits based on the transform key passed to theme.init()
@@ -37,7 +63,6 @@ module.exports = {
       })
       .join('\n');
 
-    const isAppendMode = config.get('appendMode');
     if (isAppendMode) {
       container.innerHTML += html;
     } else {
@@ -66,9 +91,14 @@ module.exports = {
     }
 
     // Add it, and wait for it to come into view
-    // Note that we need to re-watch it each it we move it around
+    // Note that we need to re-watch it each time we move it around
     container.appendChild(sentinel);
     events.onNodeVisible(sentinel, () => {
+      // Do not trigger more result if the infinite scroll is temporarily
+      // disabled
+      if (config.get('disableInfiniteScroll')) {
+        return;
+      }
       this.__infiniteScrollCallback();
     });
   },
