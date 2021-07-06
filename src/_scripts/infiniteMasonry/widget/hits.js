@@ -76,9 +76,16 @@ module.exports = {
    * Add a "Back to top" button at the bottom of the list
    **/
   addBackToTopButton() {
+    const backToTopId = 'masonryBackToTop';
+    // Do nothing if already added
+    if (document.getElementById(backToTopId)) {
+      return;
+    }
+
     const container = config.get('container');
 
     const button = document.createElement('div');
+    button.id = backToTopId;
     button.classList.add('js-masonryBackToTop');
     button.innerHTML = 'Back to top ↺';
     button.addEventListener('click', () => {
