@@ -22,5 +22,5 @@ input.hidden.if(type="checkbox" id="filters")
 
         .absolute.z-2.right-0.top-0.hidden.then_block
           .bg-gray-1.rounded.shadow-2.border-001.border-gray-4
-            !=data.themeMethods.template('filters', { include })
+            !=include("_includes/templates/filters.pug")
 

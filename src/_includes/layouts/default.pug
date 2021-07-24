@@ -7,12 +7,12 @@ html(lang='en')
       block content
       #empty.hidden.p-5.text-6.white.text-center Sorry, no map found
       #hits.js-masonryWall.min-h-100vh
-      !=data.themeMethods.template('footer', { include })
+      !=include("_includes/templates/footer.pug")
 
     textarea#hitTemplate(hidden)
       .js-masonryBrick.relative.bg-gray-1.rounded.shadow-2.border-001.border-gray-4.transform.transition-transform.hover_scale-105p
         .js-masonryContent(id="{{objectID}}")
-          include ../templates/hit
+          !=include("_includes/templates/hit.pug")
 
   script!=`window.CONFIG = ${JSON.stringify(data.config)}`
   +norska_scripts
