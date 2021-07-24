@@ -22,7 +22,7 @@
     "test": "./scripts/test",
     "test:watch": "./scripts/test-watch"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "engines": {
     "node": ">=14.17.0"
   }
