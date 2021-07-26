@@ -3,8 +3,12 @@
 @import 'tailwindcss/utilities';
 @import 'norska-frontend/style.css';
 
-@import '_styles/header.css';
-@import '_styles/hits.css';
-@import '_styles/sortBy.css';
-@import '_styles/tags.css';
-@import '_styles/toggle.css';
+/* Styles meant to be overwritten by the host */
+@import '_styles/theme.css';
+
+/* Those are required for the theme to work */
+@import '_styles/theme/header.css';
+@import '_styles/theme/hits.css';
+@import '_styles/theme/sortBy.css';
+@import '_styles/theme/tags.css';
+@import '_styles/theme/toggle.css';

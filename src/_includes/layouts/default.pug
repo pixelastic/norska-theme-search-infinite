@@ -1,18 +1,24 @@
+//- Use the default logo as favicon by default
+- data.meta.favicon = data.meta.favicon || "assets/logo.svg"
+
 doctype html
 html(lang='en')
   +norska_head
-  body.bg-theme
+  body.bg-theme.white
     include ../header.pug
     .mt-9.p-1
-      block content
-      #empty.hidden.p-5.text-6.white.text-center Sorry, no map found
+      #empty.hidden.p-5.text-6.white.text-center Sorry, no result found
       #hits.js-masonryWall.min-h-100vh
       !=include("_includes/templates/footer.pug")
+      //- We don't really need the initial page content, 
+      //- but we need the "block content" pug code, so we just hide it
+      .hidden
+        block content
 
     textarea#hitTemplate(hidden)
-      .js-masonryBrick.relative.bg-gray-1.rounded.shadow-2.border-001.border-gray-4.transform.transition-transform.hover_scale-105p
+      .js-masonryBrick.relative.bg-gray-1.black.rounded.shadow-2.border-001.border-gray-4.transform.transition-transform.hover_scale-105p
         .js-masonryContent(id="{{objectID}}")
           !=include("_includes/templates/hit.pug")
 
-  script!=`window.CONFIG = ${JSON.stringify(data.config)}`
-  +norska_scripts
+    script!=`window.CONFIG = ${JSON.stringify(data.config)}`
+    +norska_scripts
