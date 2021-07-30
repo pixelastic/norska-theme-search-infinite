@@ -1,7 +1,7 @@
 {
   "devDependencies": {
-    "aberlaas": "1.24.1",
-    "norska": "2.6.0"
+    "aberlaas": "1.24.3",
+    "norska": "2.7.0"
   },
   "files": [
     "main.js",
