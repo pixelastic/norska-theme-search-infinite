@@ -2,8 +2,13 @@
  * Hits
  **/
 .js-masonryWall {
-  @apply grid gap-x-1 gap-y-1 grid-cols-w-20 pr-1;
+  @apply grid gap-x-1 gap-y-1 grid-cols-w-16;
   grid-auto-rows: 10px; /* Implicit height of newly created rows */
+}
+@screen lg {
+  .js-masonryWall {
+    @apply grid-cols-w-20;
+  }
 }
 .js-masonryBackToTop {
   @apply row-span-5 flex flex-no-wrap flex-center white text-4 pointer;
@@ -11,14 +16,6 @@
   &:hover {
     @apply underline;
   }
-}
-
-/* Zoom */
-.medium-zoom-overlay {
-  @apply bg-blue-7 bg-opacity-90p z-8;
-}
-.medium-zoom-image--opened {
-  @apply z-9;
 }
 
 /* Highlight */
