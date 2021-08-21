@@ -1,6 +1,6 @@
 const infiniteMasonry = require('./_scripts/infiniteMasonry');
 const themeConfig = require('./_scripts/themeConfig.js');
-const lazyloadHelper = require('norska/frontend/algolia/helpers/lazyload');
+const lazyloadHelper = require('norska/frontend/algolia/lazyload');
 
 module.exports = {
   /**
